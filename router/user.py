@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from router.schemas import UserRequestSchema, UserResponseSchema
 from db.database import get_db
@@ -17,5 +17,5 @@ def create(request: UserRequestSchema, db: Session = Depends(get_db)):
 
 
 @router.get('/all', response_model=List[UserResponseSchema])
-def get_all_products(db: Session = Depends(get_db)):
+def get_all_articles(db: Session = Depends(get_db)):
     return db_user.get_all(db)

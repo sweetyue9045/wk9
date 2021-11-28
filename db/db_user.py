@@ -4,13 +4,10 @@ from sqlalchemy.orm.session import Session
 
 from db.models import DbUser
 
-
 def create(db: Session, request: UserRequestSchema) -> DbUser:
     new_user = DbUser(
         username=request.username,
         email=request.email,
-        password=request.password,
-        is_admin=request.is_admin,
     )
     db.add(new_user)
     db.commit()

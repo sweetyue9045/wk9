@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from router.schemas import ProductRequestSchema
+from router.schemas import ArticleRequestSchema
 from sqlalchemy.orm.session import Session
 from .article_feed import article
 
@@ -20,34 +20,26 @@ def db_feed(db: Session):
     return db.query(DbArticle).all()
 
 
-def create(db: Session, request: ProductRequestSchema) -> DbArticle:
-    new_product = DbArticle(
+def create(db: Session, request: ArticleRequestSchema) -> DbArticle:
+    new_article = DbArticle(
         article_title=request.article_title,
         author=request.author,
         article_content=request.article_content,
         owner_id=request.owner_id
     )
-    db.add(new_product)
+    db.add(new_article)
     db.commit()
-    db.refresh(new_product)
-    return new_product
+    db.refresh(new_article)
+    return new_article
 
 
 def get_all(db: Session) -> list[DbArticle]:
     return db.query(DbArticle).all()
 
 
-def get_product_by_id(product_id: int, db: Session) -> DbArticle:
-    product = db.query(DbArticle).filter(DbArticle.id == product_id).first()
-    if not product:
+def get_article_by_id(article_id: int, db: Session) -> DbArticle:
+    article = db.query(DbArticle).filter(DbArticle.id == article_id).first()
+    if not article:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f'Product with id = {id} not found')
-    return product
-
-
-# def get_product_by_category(category: str, db: Session) -> list[DbProduct]:
-#     product = db.query(DbProduct).filter(DbProduct.category == category).all()
-#     if not product:
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-#                             detail=f'Product with category = {id} not found')
-#     return product
+                            detail=f'Article with id = {id} not found')
+    return article
