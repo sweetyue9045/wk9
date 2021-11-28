@@ -3,15 +3,9 @@ from typing import List
 
 
 class ProductRequestSchema(BaseModel):
-    category: str
-    name: str
-    sku: str
-    price: int
-    image: str
-    description: str
-    description_long: str
-    currency: str
-    countInStock: int
+    article_title: str
+    author: str
+    article_content: str
     owner_id: int
 
 
