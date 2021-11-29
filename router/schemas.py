@@ -20,6 +20,11 @@ class OnlyUserResponseSchema(UserRequestSchema):
     class Config:
         orm_mode = True
 
+class OnlyArticleResponseSchema(ArticleRequestSchema):
+    pass
+
+    class Config:
+        orm_mode = True
 
 class ArticleResponseSchema(ArticleRequestSchema):
     id: int
@@ -31,7 +36,7 @@ class ArticleResponseSchema(ArticleRequestSchema):
 
 class UserResponseSchema(UserRequestSchema):
     id: int
-    created_articles: List[ArticleResponseSchema] = []
+    created_articles: List[OnlyArticleResponseSchema] = []
 
     class Config:
         orm_mode = True
