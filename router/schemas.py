@@ -3,9 +3,9 @@ from typing import List
 
 
 class ArticleRequestSchema(BaseModel):
-    article_title: str
+    title: str
     author: str
-    article_content: str
+    content: str
     owner_id: int
 
 

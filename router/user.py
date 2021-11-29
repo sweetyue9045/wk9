@@ -16,6 +16,11 @@ def create(request: UserRequestSchema, db: Session = Depends(get_db)):
     return db_user.create(db=db, request=request)
 
 
+@router.get('/feed', response_model=List[UserResponseSchema])
+def get_all_users(db: Session = Depends(get_db)):
+    return db_user.db_feed(db)
+
+
 @router.get('/all', response_model=List[UserResponseSchema])
-def get_all_articles(db: Session = Depends(get_db)):
+def get_all_users(db: Session = Depends(get_db)):
     return db_user.get_all(db)

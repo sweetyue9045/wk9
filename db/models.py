@@ -7,9 +7,9 @@ from sqlalchemy.sql.schema import ForeignKey
 class DbArticle(Base):
     __tablename__ = 'article'
     id = Column(Integer, primary_key=True, index=True)
-    article_title = Column(String)
+    title = Column(String)
     author = Column(String)
-    article_content = Column(String)
+    content = Column(String)
     owner_id = Column(Integer, ForeignKey('user.id'))
     owner = relationship('DbUser', back_populates ='created_articles')
 

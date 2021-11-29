@@ -8,9 +8,9 @@ from db.models import DbArticle
 
 def db_feed(db: Session):
     new_article_list = [DbArticle(
-        article_title=article["article_title"],
+        title=article["title"],
         author=article["author"],
-        article_content=article["article_content"],
+        content=article["content"],
         owner_id=article["owner_id"]
     ) for article in article]
     db.query(DbArticle).delete()
@@ -22,9 +22,9 @@ def db_feed(db: Session):
 
 def create(db: Session, request: ArticleRequestSchema) -> DbArticle:
     new_article = DbArticle(
-        article_title=request.article_title,
+        title=request.title,
         author=request.author,
-        article_content=request.article_content,
+        content=request.content,
         owner_id=request.owner_id
     )
     db.add(new_article)

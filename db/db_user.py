@@ -1,8 +1,20 @@
 from fastapi import HTTPException, status
 from router.schemas import UserRequestSchema
 from sqlalchemy.orm.session import Session
+from .user_feed import user
 
 from db.models import DbUser
+
+def db_feed(db: Session):
+    new_user_list = [DbUser(
+        username=user["username"],
+        email=user["email"],
+    ) for user in user]
+    db.query(DbUser).delete()
+    db.commit()
+    db.add_all(new_user_list)
+    db.commit()
+    return db.query(DbUser).all()
 
 def create(db: Session, request: UserRequestSchema) -> DbUser:
     new_user = DbUser(
