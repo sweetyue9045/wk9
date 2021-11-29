@@ -8,11 +8,22 @@ class ArticleRequestSchema(BaseModel):
     content: str
     owner_id: int
 
+class ArticleResponseSchema(ArticleRequestSchema):
+    id: int
+    owner_id: int
+
+    class Config:
+        orm_mode = True
 
 class UserRequestSchema(BaseModel):
     username: str
     email: str
 
+class UserResponseSchema(UserRequestSchema):
+    id: int
+
+    class Config:
+        orm_mode = True
 
 class OnlyUserResponseSchema(UserRequestSchema):
     pass
@@ -26,7 +37,7 @@ class OnlyArticleResponseSchema(ArticleRequestSchema):
     class Config:
         orm_mode = True
 
-class ArticleResponseSchema(ArticleRequestSchema):
+class ArticleResponseWithUserSchema(ArticleRequestSchema):
     id: int
     owner_id: int
     owner: OnlyUserResponseSchema
@@ -34,7 +45,7 @@ class ArticleResponseSchema(ArticleRequestSchema):
     class Config:
         orm_mode = True
 
-class UserResponseSchema(UserRequestSchema):
+class UserResponseWithProductsSchema(UserRequestSchema):
     id: int
     created_articles: List[OnlyArticleResponseSchema] = []
 
