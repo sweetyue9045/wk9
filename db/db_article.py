@@ -41,5 +41,5 @@ def get_article_by_id(article_id: int, db: Session) -> DbArticle:
     article = db.query(DbArticle).filter(DbArticle.id == article_id).first()
     if not article:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f'Article with id = {id} not found')
+                            detail=f'Article with id = {article_id} not found')
     return article
