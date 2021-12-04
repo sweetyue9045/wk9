@@ -19,5 +19,3 @@ class DbUser(Base):
     username = Column(String(30), unique=True, nullable=False)
     email = Column(String(30), unique=True, nullable=False)
     created_articles = relationship('DbArticle', back_populates='owner')
-
-

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from router.schemas import UserRequestSchema, UserResponseSchema, UserResponseWithProductsSchema
+from router.schemas import UserRequestSchema, UserResponseSchema, UserResponseWithArticleSchema
 from db.database import get_db
 from db import db_user
 from typing import List
@@ -25,6 +25,6 @@ def get_all_users(db: Session = Depends(get_db)):
 def get_all_users(db: Session = Depends(get_db)):
     return db_user.get_all(db)
 
-@router.get('/id/{user_id}', response_model=UserResponseWithProductsSchema)
+@router.get('/id/{user_id}', response_model=UserResponseWithArticleSchema)
 def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
     return db_user.get_user_by_id(user_id=user_id, db=db)
