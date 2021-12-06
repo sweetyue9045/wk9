@@ -12,6 +12,8 @@ gunicorn = "*"
 email-validator = "*"
 bcrypt = "*"
 passlib = "*"
+python-multipart = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
